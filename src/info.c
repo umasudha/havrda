@@ -34,7 +34,7 @@
 
 #include "defns.h"
 #include "extern.h"
-
+#include "math.h"
 #include "transform.h"
 #include "redefine.h"
 
@@ -58,12 +58,12 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 
     /*  Compute total info after split, by summing the
 	info of each of the subsets formed by the test  */
-
+    BaseInfo = TotalInfo(GEnv.Freq[v], 1, MaxClass);
     ForEach(v, 1, MaxVal)
     {
 	ThisInfo += TotalInfo(GEnv.Freq[v], 1, MaxClass);
     }
-    ThisInfo /= TotalCases;
+    ThisInfo = (GEnv.Freq[v] /TotalCases )* ThisInfo;
 
     /*  Set the gain in information for all cases, adjusted for unknowns  */
 
@@ -85,18 +85,27 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
 /*     ---------  */
 {
     DiscrValue	v;
-    double	Sum=0.0, TotalCases=0;
+    double	Sum=0.0, TotalCases=0,Sum1=0.0;
     CaseCount	N;
-
+double alpha =-1.25;
+	double q= 1/(1-alpha);
     ForEach(v, MinVal, MaxVal)
     {
 	N = V[v];
 
-	Sum += N * Log(N);
+	//Sum += N * Log(N);
 	TotalCases += N;
     }
+ ForEach(v, MinVal, MaxVal)
+    {
+	N = V[v];
 
-    return TotalCases * Log(TotalCases) - Sum;
+	//Sum += N * Log(N);
+	Sum1 = N / TotalCases;
+        Sum = pow( Sum1,alpha);
+    }
+	Sum =(Sum -1)*q;
+    return Sum;
 }
 
 
