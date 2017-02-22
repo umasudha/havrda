@@ -86,7 +86,8 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     int		MissingValues=0;
     CaseCount	KnownCases;
     Boolean	Better;
-
+double alpha =-1.25;
+double q= 1/(1-alpha);
     /*  First compute Freq[][], ValFreq[], base info, and the gain
 	and total info of a split on discrete attribute Att  */
 
@@ -238,10 +239,11 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 
     ForEach(V1, 1, GEnv.Blocks)
     {
-	GEnv.SubsetInfo[V1] = -GEnv.ValFreq[V1] * Log(GEnv.ValFreq[V1] / Cases);
+	GEnv.SubsetInfo[V1] = (pow(GEnv.ValFreq[V1],alpha)/ Cases);
 	GEnv.SubsetEntr[V1] = TotalInfo(GEnv.Freq[V1], 1, MaxClass);
     }
-
+GEnv.SubsetInfo[V1]=GEnv.SubsetInfo[V1]-1;
+	GEnv.SubsetInfo[V1] *= q;
     ForEach(V1, First, GEnv.Blocks-1)
     {
 	ForEach(V2, V1+1, GEnv.Blocks)
@@ -367,17 +369,25 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0;
     int		R, C;
-
+double alpha =-1.25;
+	double q=1/(1-alpha);
     AddBlock(x, y);
-
-    ForEach(c, 1, MaxClass)
+   ForEach(c, 1, MaxClass)
     {
-	Entr -= GEnv.Freq[x][c] * Log(GEnv.Freq[x][c]);
+	//Entr += pow(GEnv.Freq[x][c] ,alpha);
 	KnownCases += GEnv.Freq[x][c];
     }
-
-    GEnv.SubsetInfo[x] = - GEnv.ValFreq[x] * Log(GEnv.ValFreq[x] / Cases);
-    GEnv.SubsetEntr[x] = Entr + KnownCases * Log(KnownCases);
+    ForEach(c, 1, MaxClass)
+    {
+	 GEnv.Freq[x][c]=   GEnv.Freq[x][c]/KnownCases;
+	Entr += pow(GEnv.Freq[x][c] ,alpha);
+	//KnownCases += GEnv.Freq[x][c];
+    }
+GEnv.Freq[x][c]= GEnv.Freq[x][c]-1;
+	GEnv.Freq[x][c] *= q;
+    GEnv.SubsetInfo[x] =  q* ((pow(GEnv.ValFreq[x],alpha)/ Cases)-1);
+    //GEnv.SubsetEntr[x] = Entr + KnownCases * Log(KnownCases);
+	GEnv.SubsetEntr[x]=Entr;
 
     /*  Eliminate y from working blocks  */
 
@@ -428,7 +438,8 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ClassNo	c;
     double	Entr=0;
     CaseCount	KnownCases=0, F;
-
+double alpha= -1.25;
+double q = 1/(1-alpha);
     if ( y < x )
     {
 	c = y;
@@ -437,15 +448,23 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     }
 
     F = GEnv.ValFreq[x] + GEnv.ValFreq[y];
-    GEnv.MergeInfo[x][y] = - F * Log(F / Cases);
+    GEnv.MergeInfo[x][y] = q*((pow(F ,alpha) / Cases)-1);
 
     ForEach(c, 1, MaxClass)
     {
 	F = GEnv.Freq[x][c] + GEnv.Freq[y][c];
-	Entr -= F * Log(F);
+	//Entr -= F * Log(F);
 	KnownCases += F;
     }
-    GEnv.MergeEntr[x][y] = Entr + KnownCases * Log(KnownCases);
+	 ForEach(c, 1, MaxClass)
+    {
+	F = GEnv.Freq[x][c] + GEnv.Freq[y][c];
+		 F= F/KnownCases;
+	//Entr -= F * Log(F);
+Entr += pow(F,alpha);
+	    }
+    Entr =( Entr-1)*q;
+	GEnv.MergeEntr[x][y] = Entr ;
 }
 
 
