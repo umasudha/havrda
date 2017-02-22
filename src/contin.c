@@ -36,8 +36,10 @@
 
 #include "transform.h"
 #include "redefine.h"
-
-#define	PartInfo(n) (-(n)*Log((n)/GEnv.Cases))
+#include "math.h"
+#define alpha 0.25
+#define q 1/(1-alpha)
+#define	PartInfo(n) ((pow(n,alpha)/GEnv.Cases)-1)*q
 
 
 /*************************************************************************/
