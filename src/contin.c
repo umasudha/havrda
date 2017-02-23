@@ -39,8 +39,7 @@
 #include "math.h"
 #define alpha -5.5
 #define q 1/(1-alpha)
-#define r n/GEnv.Cases
-#define	PartInfo(n) pow(n,alpha)-1
+#define	PartInfo(n) (pow(n,alpha)/GEnv.Cases) -1 *q
 
 
 /*************************************************************************/
