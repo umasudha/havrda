@@ -384,7 +384,7 @@ double alpha =-1.25;
 	 GEnv.Freq[x][c]=   GEnv.Freq[x][c]/KnownCases;
 	Entr += pow(GEnv.Freq[x][c] ,alpha);
 	//KnownCases += GEnv.Freq[x][c];
-	     count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c]
+	     count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
     }
 	
 GEnv.Freq[x][c]= GEnv.Freq[x][c]-1;
