@@ -88,6 +88,7 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     double	Sum=0.0, TotalCases=0,Sum1=0.0;
     CaseCount	N;
 double alpha =-1.25;
+	double count[20];
 	double q= 1/(1-alpha);
     ForEach(v, MinVal, MaxVal)
     {
