@@ -463,7 +463,7 @@ double q = 1/(1-alpha);
 
     F = GEnv.ValFreq[x] + GEnv.ValFreq[y];
 	F /= Cases;
-    GEnv.MergeInfo[x][y] = q*((pow(F ,alpha)-1);
+    GEnv.MergeInfo[x][y] = q*(pow(F ,alpha)-1);
 
     ForEach(c, 1, MaxClass)
     {
