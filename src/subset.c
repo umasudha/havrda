@@ -391,11 +391,11 @@ double alpha =8.6;
 	if(count[i]<0)
 	{
 		count[i] = -1 * count[i];
-	}
-	Entr /= pow(KnownCases,alpha);
+	}	
    Entr = Entr -1;
 	Entr *= q;	
 	count[i] /= KnownCases;
+	Entr = Entr+( pow(KnownCases,alpha));
 	Entr *= count[i];
 	i++;
 	GEnv.ValFreq[x] /= Cases;
@@ -486,9 +486,10 @@ Entr += pow(F,alpha);
 	{
 		count[i] = -1 * count[i];
 	}
-		Entr /= pow(KnownCases,alpha);
+		
     Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
+	Entr = Entr +(pow(KnownCases,alpha));
 	Entr *= count[i];
 	i++;
 	GEnv.MergeEntr[x][y] = Entr;//+ Entr/KnownCases ;
