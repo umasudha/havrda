@@ -371,6 +371,7 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     int		R, C;
 double alpha =-1.25;
 	double q=1/(1-alpha);
+	double count[20];
     AddBlock(x, y);
    ForEach(c, 1, MaxClass)
     {
@@ -442,6 +443,7 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0, F;
 double alpha= -1.25;
+	double count[20];
 double q = 1/(1-alpha);
     if ( y < x )
     {
