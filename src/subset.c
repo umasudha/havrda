@@ -370,6 +370,7 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     CaseCount	KnownCases=0;
     int		R, C;
 double alpha =-1.25;
+	int i=0;
 	double q=1/(1-alpha);
 	double count[20];
     AddBlock(x, y);
@@ -383,12 +384,14 @@ double alpha =-1.25;
 	 GEnv.Freq[x][c]=   GEnv.Freq[x][c]/KnownCases;
 	Entr += pow(GEnv.Freq[x][c] ,alpha);
 	//KnownCases += GEnv.Freq[x][c];
-	     count[i]= GEnv.Freq[x][c]-GEnv.Freq[y][c]
+	     count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c]
     }
+	
 GEnv.Freq[x][c]= GEnv.Freq[x][c]-1;
 	GEnv.Freq[x][c] *= q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
+	i++;
     GEnv.SubsetInfo[x] =  q* ((pow(GEnv.ValFreq[x],alpha)/ Cases)-1);
     //GEnv.SubsetEntr[x] = Entr + KnownCases * Log(KnownCases);
 	GEnv.SubsetEntr[x]=Entr;
@@ -443,6 +446,7 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0, F;
 double alpha= -1.25;
+	int i=0;
 	double count[20];
 double q = 1/(1-alpha);
     if ( y < x )
@@ -467,12 +471,13 @@ double q = 1/(1-alpha);
 		 F= F/KnownCases;
 	//Entr -= F * Log(F);
 Entr += pow(F,alpha);
-		  count[i]= GEnv.Freq[x][c]-GEnv.Freq[y][c];
+		  count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
     
 	    }
     Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
+	i++;
 	GEnv.MergeEntr[x][y] = Entr ;
 }
 
