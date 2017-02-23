@@ -86,7 +86,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     int		MissingValues=0;
     CaseCount	KnownCases;
     Boolean	Better;
-double alpha =-1.25;
+double alpha =1.25;
 double q= 1/(1-alpha);
     /*  First compute Freq[][], ValFreq[], base info, and the gain
 	and total info of a split on discrete attribute Att  */
@@ -386,7 +386,10 @@ double alpha =-1.25;
 	//KnownCases += GEnv.Freq[x][c];
 	     count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
     }
-	
+	if(count[i]<0)
+	{
+		count[i] = -1 * count[i];
+	}
 GEnv.Freq[x][c]= GEnv.Freq[x][c]-1;
 	GEnv.Freq[x][c] *= q;
 	count[i] /= KnownCases;
@@ -474,6 +477,10 @@ Entr += pow(F,alpha);
 		  count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
     
 	    }
+	if(count[i]<0)
+	{
+		count[i] = -1 * count[i];
+	}
     Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
