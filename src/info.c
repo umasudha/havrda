@@ -112,8 +112,9 @@ double alpha =8.6;
 		count[i] = -1 * count[i];
 	}
 	count[i] /= TotalCases;
-	Sum =(Sum -1)*q;
 	Sum /= pow(TotalCases,alpha);
+	Sum =(Sum -1)*q;
+	
 	Sum *= count[i];
 	
 	i++;
