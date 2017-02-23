@@ -307,7 +307,7 @@ double q= 1/(1-alpha);
 
 	Penalty  = ( finite(Bell[InitialBlocks][GEnv.Blocks-1]) ?
 			Log(Bell[InitialBlocks][GEnv.Blocks-1]) :
-			pow((InitialBlocks-GEnv.Blocks+1),alpha));// * Log(GEnv.Blocks-1) );
+			(InitialBlocks-GEnv.Blocks+1) * Log(GEnv.Blocks-1) );
 
 	Val = (BestGain - Penalty / Cases) / BestInfo;
 
@@ -391,8 +391,8 @@ double alpha =-5.5;
 	{
 		count[i] = -1 * count[i];
 	}
-GEnv.Freq[x][c]= GEnv.Freq[x][c]-1;
-	GEnv.Freq[x][c] *= q;
+   Entr = Entr -1;
+	Entr *= q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
 	i++;
