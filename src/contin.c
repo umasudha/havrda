@@ -7,6 +7,7 @@
 /*									 */
 /*  C5.0 GPL Edition is free software: you can redistribute it and/or	 */
 /*  modify it under the terms of the GNU General Public License as	 */
+
 /*  published by the Free Software Foundation, either version 3 of the	 */
 /*  License, or (at your option) any later version.			 */
 /*									 */
@@ -37,7 +38,7 @@
 #include "transform.h"
 #include "redefine.h"
 #include "math.h"
-#define alpha 16.5
+#define alpha 11.5
 #define q 1/(1-alpha)
 #define	PartInfo(n) (pow(n,alpha)/GEnv.Cases) -1 *q
 
