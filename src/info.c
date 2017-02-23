@@ -87,7 +87,7 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     DiscrValue	v,x,y;
     double	Sum=0.0, TotalCases=0,Sum1=0.0;
     CaseCount	N;
-double alpha =8.9;
+double alpha =8.6;
 	double count[20];
 	int i=0;
 	double q= 1/(1-alpha);
@@ -103,7 +103,7 @@ double alpha =8.9;
 	N = V[v];
 
 	//Sum += N * Log(N);
-	Sum1 = N;
+	Sum1 = N/TotalCases;
         Sum = pow( Sum1,alpha);
 	 count[i] += GEnv.Freq[x][v]-GEnv.Freq[y][v];
     }
@@ -114,7 +114,7 @@ double alpha =8.9;
 	count[i] /= TotalCases;
 	Sum =(Sum -1)*q;
 	Sum *= count[i];
-	Sum /= TotalCases;
+	//Sum /= TotalCases;
 	i++;
     return Sum;
 }
