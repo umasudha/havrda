@@ -105,7 +105,7 @@ double alpha =8.6;
 	//Sum += N * Log(N);
 	//Sum1 = N/TotalCases;
 	 Sum1 =N;
-        Sum += (pow(N,alpha))/TotalCases;
+        Sum += pow((N/TotalCases),alpha);
 	 count[i] += GEnv.Freq[x][v]-GEnv.Freq[y][v];
     }
 	if(count[i]<0)
