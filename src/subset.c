@@ -384,7 +384,7 @@ double alpha =8.6;
     ForEach(c, 1, MaxClass)
     {
 	//GEnv.Freq[x][c]=   GEnv.Freq[x][c]/KnownCases;
-	Entr += (pow(GEnv.Freq[x][c] alpha))/KnownCases;	
+	Entr += (pow(GEnv.Freq[x][c],alpha))/KnownCases;	
 	     count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
     }
 	if(count[i]<0)
