@@ -392,6 +392,7 @@ double alpha =8.6;
 	{
 		count[i] = -1 * count[i];
 	}	
+	Entr = Entr - pow(KnownCases,alpha);
    Entr = Entr -1;
 	Entr *= q;	
 	count[i] /= KnownCases;
@@ -400,7 +401,7 @@ double alpha =8.6;
 	GEnv.ValFreq[x] /= Cases;
     GEnv.SubsetInfo[x] =  (pow(GEnv.ValFreq[x],alpha)-1) * q;
     //GEnv.SubsetEntr[x] = Entr + KnownCases * Log(KnownCases);
-	Entr /= KnownCases;
+	
 	GEnv.SubsetEntr[x]=Entr;
 
     /*  Eliminate y from working blocks  */
@@ -486,11 +487,11 @@ Entr += pow(F,alpha);
 	{
 		count[i] = -1 * count[i];
 	}
-		
+		Entr = Entr - pow(KnownCases,alpha);
     Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
-	Entr /= KnownCases;
+	
 	i++;
 	GEnv.MergeEntr[x][y] = Entr;//+ Entr/KnownCases ;
 }
