@@ -103,7 +103,8 @@ double alpha =8.6;
 	N = V[v];
 
 	//Sum += N * Log(N);
-	Sum1 = N;
+	Sum1 = N/TotalCases;
+	 //Sum1 =N;
         Sum += pow( Sum1,alpha);
 	 count[i] += GEnv.Freq[x][v]-GEnv.Freq[y][v];
     }
@@ -115,7 +116,7 @@ double alpha =8.6;
 	
 	Sum =(Sum -1)*q;	
 	Sum *= count[i];
-	Sum /= TotalCases;
+	//Sum /= TotalCases;
 	i++;
     return Sum;
 }
