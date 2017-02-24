@@ -392,7 +392,7 @@ double alpha =8.6;
 	{
 		count[i] = -1 * count[i];
 	}	
-	Entr = Entr - pow(KnownCases,alpha);
+	Entr = Entr /KnownCases;
    Entr = Entr -1;
 	Entr *= q;	
 	count[i] /= KnownCases;
@@ -487,13 +487,13 @@ Entr += pow(F,alpha);
 	{
 		count[i] = -1 * count[i];
 	}
-		Entr = Entr - pow(KnownCases,alpha);
+		Entr = Entr /KnownCases;
     Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
 	
 	i++;
-	GEnv.MergeEntr[x][y] = Entr;//+ Entr/KnownCases ;
+	GEnv.MergeEntr[x][y] = Entr;
 }
 
 
