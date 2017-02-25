@@ -86,7 +86,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     int		MissingValues=0;
     CaseCount	KnownCases;
     Boolean	Better;
-double alpha =-2.6;
+double alpha =8.6;
 double q= 1/(1-alpha);
     /*  First compute Freq[][], ValFreq[], base info, and the gain
 	and total info of a split on discrete attribute Att  */
@@ -371,7 +371,7 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0;
     int		R, C;
-double alpha =-2.6;
+double alpha =8.6;
 	int i=0;
 	double q=1/(1-alpha);
 	double count[20];
@@ -387,7 +387,7 @@ double alpha =-2.6;
 	{
 		count[i] = -1 * count[i];
 	}		
-	Entr = Entr /(pow(KnownCases,alpha));
+	Entr = Entr *(pow(KnownCases,-alpha));
    	Entr = Entr -1;
 	Entr *= q;	
 	count[i] /= KnownCases;
@@ -448,7 +448,7 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ClassNo	c;
     double	Entr=0;
     CaseCount	KnownCases=0, F;
-double alpha= -2.6;
+double alpha= 8.6;
 	int i=0;
 	double count[20];
 double q = 1/(1-alpha);
@@ -474,7 +474,7 @@ double q = 1/(1-alpha);
 	{
 		count[i] = -1 * count[i];
 	}
-	Entr = Entr /(pow(KnownCases,alpha));
+	Entr = Entr *(pow(KnownCases,-alpha));
     	Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
