@@ -375,23 +375,20 @@ double alpha =8.6;
 	int i=0;
 	double q=1/(1-alpha);
 	double count[20];
-    AddBlock(x, y);
-   ForEach(c, 1, MaxClass)
-    {
-	//Entr += pow(GEnv.Freq[x][c] ,alpha);
-	KnownCases += GEnv.Freq[x][c];
-    }
+    AddBlock(x, y);  
     ForEach(c, 1, MaxClass)
     {
 	//GEnv.Freq[x][c]=   GEnv.Freq[x][c]/KnownCases;
-	Entr += (pow(GEnv.Freq[x][c],alpha))/(KnownCases);	
+	Entr += (pow(GEnv.Freq[x][c],alpha));	
 	     count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
+	    KnownCases += GEnv.Freq[x][c];
     }
 	if(count[i]<0)
 	{
 		count[i] = -1 * count[i];
 	}		
-   Entr = Entr -1;
+	Entr = Entr /(KnownCases);
+   	Entr = Entr -1;
 	Entr *= q;	
 	count[i] /= KnownCases;
 	Entr *= count[i];
@@ -468,22 +465,17 @@ double q = 1/(1-alpha);
 
     ForEach(c, 1, MaxClass)
     {
-	F = GEnv.Freq[x][c] + GEnv.Freq[y][c];
-	//Entr -= F * Log(F);
-	KnownCases += F;
-    }
-	 ForEach(c, 1, MaxClass)
-    {
 	F = GEnv.Freq[x][c] + GEnv.Freq[y][c];		
-Entr += (pow(F,alpha))/(KnownCases);
-		  count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
-    
-	    }
+	Entr += (pow(F,alpha));
+	count[i] += GEnv.Freq[x][c]-GEnv.Freq[y][c];
+    	KnownCases += F;
+    }
 	if(count[i]<0)
 	{
 		count[i] = -1 * count[i];
-	}		
-    Entr =( Entr-1)*q;
+	}
+	Entr = Entr/(KnownCases);
+    	Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
 	
