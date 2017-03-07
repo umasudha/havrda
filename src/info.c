@@ -49,7 +49,7 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 		   CaseCount TotalCases)
 /*     -----------  */
 {
-    DiscrValue	v;
+    DiscrValue	v,x,y;
     double	ThisInfo=0.0;
 double count[20];
 	int i=0;
