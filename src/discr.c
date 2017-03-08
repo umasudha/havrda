@@ -244,7 +244,7 @@ double DiscrKnownBaseInfo(CaseCount KnownCases, DiscrValue MaxVal)
     ClassNo	c;
     CaseCount	ClassCount;
     DiscrValue	v;
-	double count[20],count1[20];	
+	double count[20],count2[20];	
 	double counter=0.0,count1=0.0,infor=0.0;
 	int i=0,i1=0;
     if ( KnownCases < 1E-5 ) return 0.0;
