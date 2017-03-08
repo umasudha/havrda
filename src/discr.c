@@ -244,9 +244,9 @@ double DiscrKnownBaseInfo(CaseCount KnownCases, DiscrValue MaxVal)
     ClassNo	c;
     CaseCount	ClassCount;
     DiscrValue	v;
-	double count[20];
-	double counter=0.0,count1=0.0,count2=0.0,infor=0.0;
-	int i=0;
+	double count[20],count1[20];	
+	double counter=0.0,count1=0.0,infor=0.0;
+	int i=0,i1=0;
     if ( KnownCases < 1E-5 ) return 0.0;
 
     ForEach(c, 1, MaxClass)
@@ -258,6 +258,7 @@ double DiscrKnownBaseInfo(CaseCount KnownCases, DiscrValue MaxVal)
 	}
 	GEnv.ClassFreq[c] = ClassCount;
     }
+	infor =TotalInfo(GEnv.ClassFreq, 1, MaxClass) / KnownCases;
 ForEach(v,1,MaxVal)
    {
 	i=0;
@@ -271,7 +272,7 @@ ForEach(v,1,MaxVal)
 	count[i] = ClassCount;
 	counter++;
 	i++;
-    }
+    }	
 	for(i=0;i<counter;i+2)
 	{
 	  	count1 = count1+(count[i]-count[i+1]);
@@ -280,11 +281,11 @@ ForEach(v,1,MaxVal)
 	{
 		count1 = (-1)*count1;
 	}
-	count2 += count1;
-}
-     count2 /= KnownCases;
-     infor =TotalInfo(GEnv.ClassFreq, 1, MaxClass) / KnownCases;
-     infor *= count2;
+	count2[i1] += count1;
+	count2[i1] /= KnownCases;	
+	infor *= count2[i1];
+	i1++;
+}                 
     return infor;
 }
 
