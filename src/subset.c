@@ -385,7 +385,7 @@ double alpha =1.75;
 	   
     }
 			
-	Entr = Entr /pow(KnownCases,alpha);
+	Entr = Entr /KnownCases;
    	Entr = Entr -1;
 	Entr *= q;	
 	
@@ -470,7 +470,7 @@ double q = 1/(1-alpha);
 	{
 		count[i] = -1 * count[i];
 	}
-	Entr = Entr /pow(KnownCases,alpha);
+	Entr = Entr /KnownCases;
     	Entr =( Entr-1)*q;
 	count[i] /= KnownCases;
 	Entr *= count[i];
