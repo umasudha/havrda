@@ -282,10 +282,11 @@ ForEach(v,1,MaxVal)
 		count1 = (-1)*count1;
 	}
 	count2[i1] += count1;
-}           
 	count2[i1] /= KnownCases;	
 	infor *= count2[i1];
 	i1++;
+}           
+	
     return infor;
 }
 
